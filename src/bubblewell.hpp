@@ -4,15 +4,18 @@
 #include <fea/userinterface.hpp>
 #include "inputhandler.hpp"
 #include "messages.hpp"
-#include "audioplayer.hpp"
+#include "bubbles.hpp"
+#include "bubbleintegrator.hpp"
 
 class Bubblewell : public fea::Application,
-    public fea::MessageReceiver<QuitMessage>
+    public fea::MessageReceiver<QuitMessage, MouseMoveMessage, KeyPressedMessage>
 {
     public:
         Bubblewell();
         ~Bubblewell();
         void handleMessage(const QuitMessage& message) override;
+        void handleMessage(const MouseMoveMessage& message) override;
+        void handleMessage(const KeyPressedMessage& message) override;
     protected:
         virtual void loop() override;
     private:
@@ -22,5 +25,10 @@ class Bubblewell : public fea::Application,
         fea::InputHandler mFeaInputHandler;
 
         InputHandler mInputHandler;
-        AudioPlayer mAudioPlayer;
+
+        fea::Texture mBubbleTexture;
+        Bubbles mBubbles;
+
+        BubbleIntegrator mIntegrator;
+        bool mSimulate;
 };

@@ -28,7 +28,7 @@ if(GLM_FOUND)
     include_directories(${GLM_INCLUDE_DIRS})
 endif()
 
-find_package(Featherkit COMPONENTS structure entity sdl2 audio rendering ui util REQUIRED)
+find_package(Featherkit COMPONENTS structure entity sdl2 rendering ui util REQUIRED)
 if(FEATHERKIT_FOUND)
     include_directories(${FEATHERKIT_INCLUDE_DIRS})
 endif()
