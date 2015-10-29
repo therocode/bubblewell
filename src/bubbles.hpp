@@ -1,6 +1,6 @@
 #pragma once
-#include "glm.hpp"
 #include <vector>
+#include "bubble.hpp"
 
 struct BubbleData
 {
@@ -8,6 +8,7 @@ struct BubbleData
     glm::vec2* positions;
     glm::vec2* velocities;
     float* radiuses;
+    fea::Color* colors;
 };
 
 struct ConstBubbleData
@@ -16,16 +17,18 @@ struct ConstBubbleData
     const glm::vec2* positions;
     const glm::vec2* velocities;
     const float* radiuses;
+    const fea::Color* colors;
 };
 
 class Bubbles
 {
     public:
-        void create(const glm::vec2& position, float radius);
+        void add(const Bubble& bubble);
         BubbleData bubbleData();
         ConstBubbleData bubbleData() const;
     private:
         std::vector<glm::vec2> mPositions;
         std::vector<glm::vec2> mVelocities;
         std::vector<float> mRadiuses;
+        std::vector<fea::Color> mColors;
 };

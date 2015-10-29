@@ -12,7 +12,6 @@ class Bubblewell : public fea::Application,
 {
     public:
         Bubblewell();
-        ~Bubblewell();
         void handleMessage(const QuitMessage& message) override;
         void handleMessage(const MouseMoveMessage& message) override;
         void handleMessage(const KeyPressedMessage& message) override;
@@ -31,4 +30,7 @@ class Bubblewell : public fea::Application,
 
         BubbleIntegrator mIntegrator;
         bool mSimulate;
+
+        float xCent;
+        float yCent;
 };

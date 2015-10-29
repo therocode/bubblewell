@@ -1,10 +1,11 @@
 #include "bubbles.hpp"
 
-void Bubbles::create(const glm::vec2& position, float radius)
+void Bubbles::add(const Bubble& bubble)
 {
-    mPositions.push_back(position);
-    mVelocities.push_back(glm::vec2());
-    mRadiuses.push_back(radius);
+    mPositions.push_back(bubble.position);
+    mVelocities.push_back(bubble.velocity);
+    mRadiuses.push_back(bubble.radius);
+    mColors.push_back(bubble.color);
 }
 
 BubbleData Bubbles::bubbleData()
@@ -14,7 +15,8 @@ BubbleData Bubbles::bubbleData()
         mPositions.size(),
         mPositions.data(),
         mVelocities.data(),
-        mRadiuses.data()
+        mRadiuses.data(),
+        mColors.data()
     };
 }
 
@@ -25,6 +27,7 @@ ConstBubbleData Bubbles::bubbleData() const
         mPositions.size(),
         mPositions.data(),
         mVelocities.data(),
-        mRadiuses.data()
+        mRadiuses.data(),
+        mColors.data()
     };
 }
