@@ -4,5 +4,5 @@
 class BubbleFactory
 {
     public: 
-        static Bubble generate(const glm::vec2& position, float radius);
+        static Bubble generate(const glm::vec2& position);
 };

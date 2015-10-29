@@ -25,7 +25,7 @@ Bubblewell::Bubblewell() :
     for(int32_t index = 0; index < 100; index++)
     {
         float floatIndex = static_cast<float>(index);
-        mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 30.0f, startY + static_cast<float>(index % 10) * 30.0f), 30.0f));
+        mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 30.0f, startY + static_cast<float>(index % 10) * 30.0f)));
     }
 }
 
@@ -73,9 +73,6 @@ void Bubblewell::loop()
         bubble.setSize({radius, radius});
         bubble.setOrigin(glm::vec2(radius, radius) / 2.0f);
         bubble.setColor(color);
-
-        fea::Color colorA(41, 80, 155);
-        fea::Color colorB(229, 45, 43);
 
         mRenderer.queue(bubble);
     }
