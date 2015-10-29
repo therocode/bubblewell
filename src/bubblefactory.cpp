@@ -4,6 +4,7 @@
 Bubble BubbleFactory::generate(const glm::vec2& position)
 {
     Bubble newBubble;
+    newBubble.staticBody = false;
 
      static std::random_device rd;
      static std::mt19937 gen(rd());
@@ -23,6 +24,18 @@ Bubble BubbleFactory::generate(const glm::vec2& position)
     //fea::Color colorA(41, 80, 155);
     //fea::Color colorB(229, 45, 43);
 
+
+    return newBubble;
+}
+
+Bubble BubbleFactory::generateStatic(const glm::vec2& position)
+{
+    Bubble newBubble;
+    newBubble.staticBody = true;
+
+    newBubble.position = position;
+    newBubble.radius = 50.0f;
+    newBubble.color = {61, 193, 170};
 
     return newBubble;
 }

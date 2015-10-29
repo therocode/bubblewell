@@ -9,6 +9,7 @@ struct BubbleData
     glm::vec2* velocities;
     float* radiuses;
     fea::Color* colors;
+    int8_t* staticBodyBools;
 };
 
 struct ConstBubbleData
@@ -18,6 +19,7 @@ struct ConstBubbleData
     const glm::vec2* velocities;
     const float* radiuses;
     const fea::Color* colors;
+    const int8_t* staticBodyBools;
 };
 
 class Bubbles
@@ -31,4 +33,5 @@ class Bubbles
         std::vector<glm::vec2> mVelocities;
         std::vector<float> mRadiuses;
         std::vector<fea::Color> mColors;
+        std::vector<int8_t> mStaticBodyBools;
 };

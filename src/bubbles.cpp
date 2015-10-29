@@ -6,6 +6,7 @@ void Bubbles::add(const Bubble& bubble)
     mVelocities.push_back(bubble.velocity);
     mRadiuses.push_back(bubble.radius);
     mColors.push_back(bubble.color);
+    mStaticBodyBools.push_back(bubble.staticBody);
 }
 
 BubbleData Bubbles::bubbleData()
@@ -16,7 +17,8 @@ BubbleData Bubbles::bubbleData()
         mPositions.data(),
         mVelocities.data(),
         mRadiuses.data(),
-        mColors.data()
+        mColors.data(),
+        mStaticBodyBools.data()
     };
 }
 
@@ -28,6 +30,7 @@ ConstBubbleData Bubbles::bubbleData() const
         mPositions.data(),
         mVelocities.data(),
         mRadiuses.data(),
-        mColors.data()
+        mColors.data(),
+        mStaticBodyBools.data()
     };
 }

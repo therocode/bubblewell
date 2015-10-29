@@ -43,6 +43,8 @@ Bubblewell::Bubblewell() :
     mCoronaQuad.setPosition({384.0f, 384.0f});
 
     mIntegrator.setGravityPoint({384.0f, 384.0f});
+
+    mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
 }
 
 void Bubblewell::handleMessage(const QuitMessage& message)

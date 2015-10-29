@@ -8,4 +8,5 @@ struct Bubble
     glm::vec2 velocity;
     float radius;
     fea::Color color;
+    bool staticBody;
 };

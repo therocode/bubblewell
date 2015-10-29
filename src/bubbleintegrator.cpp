@@ -12,15 +12,18 @@ void BubbleIntegrator::integrate(BubbleData bubbleData) const
 
     for(size_t index = 0; index < bubbleData.bubbleAmount; index++)
     {
-        radius =  bubbleData.radiuses[index];
-        oldPosition = bubbleData.positions[index];
-        distanceToGravity = glm::distance(oldPosition, mGravityPoint);
-        directionToGravity = glm::normalize(mGravityPoint - oldPosition);
+        if(!bubbleData.staticBodyBools[index])
+        {
+            radius =  bubbleData.radiuses[index];
+            oldPosition = bubbleData.positions[index];
+            distanceToGravity = glm::distance(oldPosition, mGravityPoint);
+            directionToGravity = glm::normalize(mGravityPoint - oldPosition);
 
-        float mass = radius * radius * glm::pi<float>();
+            float mass = radius * radius * glm::pi<float>();
 
-        bubbleData.velocities[index] += directionToGravity * gGravityConstant * ((gGravityPointMass * mass) / std::pow(distanceToGravity, 2.0f));
-        bubbleData.positions[index] += bubbleData.velocities[index];
+            bubbleData.velocities[index] += directionToGravity * gGravityConstant * ((gGravityPointMass * mass) / std::pow(distanceToGravity, 2.0f));
+            bubbleData.positions[index] += bubbleData.velocities[index];
+        }
     }
 }
 
