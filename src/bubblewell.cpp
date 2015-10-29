@@ -10,7 +10,9 @@ Bubblewell::Bubblewell() :
     mRenderer(fea::Viewport({1366, 768}, {0, 0}, fea::Camera({1366 / 2.0f, 768 / 2.0f}))),
     mFeaInputHandler(new fea::SDL2InputBackend()),
     mInputHandler(mBus, mFeaInputHandler),
-    mSimulate(false)
+    mSimulate(false),
+    mNoiseAnimation({0, 0}, {64, 64}, 4, 12, true),
+    mNoiseQuad({1366.0f, 768.0f})
 {
     mWindow.setVSyncEnabled(true);
     mWindow.setFramerateLimit(60);
@@ -27,6 +29,12 @@ Bubblewell::Bubblewell() :
         float floatIndex = static_cast<float>(index);
         mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 30.0f, startY + static_cast<float>(index % 10) * 30.0f)));
     }
+
+    mNoiseTexture = makeTexture("data/textures/noise.png");
+    mNoiseQuad.setTexture(mNoiseTexture);  
+    mNoiseQuad.setAnimation(mNoiseAnimation);  
+    mNoiseQuad.setTileSize({64.0f, 64.0f});
+    mNoiseQuad.setColor({41, 80, 155, 150});
 }
 
 void Bubblewell::handleMessage(const QuitMessage& message)
@@ -58,6 +66,8 @@ void Bubblewell::loop()
 
     mRenderer.clear();
 
+    mRenderer.queue(mNoiseQuad);
+
     fea::Quad bubble;
     bubble.setTexture(mBubbleTexture);
 
@@ -80,4 +90,8 @@ void Bubblewell::loop()
     mRenderer.render();
 
     mWindow.swapBuffers();
+
+    mNoiseQuad.tick();
+
+    mNoiseQuad.tick();
 }

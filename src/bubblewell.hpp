@@ -33,4 +33,8 @@ class Bubblewell : public fea::Application,
 
         float xCent;
         float yCent;
+
+        fea::Texture mNoiseTexture;
+        fea::Animation mNoiseAnimation;
+        fea::RepeatedQuad mNoiseQuad;
 };

@@ -17,7 +17,7 @@ Bubble BubbleFactory::generate(const glm::vec2& position)
     newBubble.position = position;
     newBubble.radius = 70.0f * sizeClass;
 
-    fea::HSVColor color(0.7f + sizeClass * 0.1f, 0.74f, 0.61f);
+    fea::HSVColor color(0.90f + sizeClass * 0.1f, 0.74f, 0.61f);
     newBubble.color = color.toRGB();
 
     //fea::Color colorA(41, 80, 155);
