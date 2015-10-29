@@ -37,4 +37,7 @@ class Bubblewell : public fea::Application,
         fea::Texture mNoiseTexture;
         fea::Animation mNoiseAnimation;
         fea::RepeatedQuad mNoiseQuad;
+
+        fea::Texture mCoronaTexture;
+        fea::Quad mCoronaQuad;
 };
