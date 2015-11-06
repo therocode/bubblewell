@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+#include "glm.hpp"
+
+class BubbleData;
 
 class BubbleDataAccumulator
 {

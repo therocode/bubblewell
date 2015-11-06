@@ -8,7 +8,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/modu
 set(project_name bubblewell)
 project(${project_name})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Wall -Wextra -Werror -Wshadow -Wconversion -Wno-long-long -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Wall -Wextra -Werror -Wshadow -Wconversion -Wno-long-long -pedantic -Wno-unused")
 
 file(GLOB_RECURSE source_files "src/*.cpp")
 file(GLOB_RECURSE header_files "src/*.hpp")

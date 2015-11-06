@@ -46,6 +46,8 @@ Bubblewell::Bubblewell() :
     mIntegrator.setGravityPoint({384.0f, 384.0f});
 
     mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
+
+    mWindow.setVSyncEnabled(false);
 }
 
 void Bubblewell::handleMessage(const QuitMessage& message)
@@ -113,4 +115,18 @@ void Bubblewell::loop()
     mWindow.swapBuffers();
 
     mNoiseQuad.tick();
+
+    //timer
+
+    if(mFrameTimer.frameCount() % 60 == 0)
+    {
+        std::cout << "frame:\n";
+        std::cout << "fps: " << mFrameTimer.fps() << "\n";
+        std::cout << "avg: " << mFrameTimer.avgFrameTime() << "\n";
+        std::cout << "last: " << mFrameTimer.lastFrameTime() << "\n";
+        std::cout << "dev: " << mFrameTimer.deviationFactor() << "\n";
+        std::cout << "\n";
+    }
+
+    mFrameTimer.sample();
 }

@@ -42,4 +42,6 @@ class Bubblewell : public fea::Application,
 
         fea::Texture mCoronaTexture;
         fea::Quad mCoronaQuad;
+
+        fea::FrameTimer mFrameTimer;
 };
