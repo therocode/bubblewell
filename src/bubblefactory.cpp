@@ -13,7 +13,7 @@ Bubble BubbleFactory::generate(const glm::vec2& position)
      //standard deviation affects the dispersion of generated values from the mean
      std::normal_distribution<float> sizeDistribution(0.5f, 0.15f);
 
-     float sizeClass = sizeDistribution(gen);
+     float sizeClass = std::max(std::min(1.0f, sizeDistribution(gen)), 0.1f);
 
     newBubble.position = position;
     newBubble.radius = 70.0f * sizeClass;

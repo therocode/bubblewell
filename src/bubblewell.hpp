@@ -6,6 +6,7 @@
 #include "messages.hpp"
 #include "bubbles.hpp"
 #include "bubbleintegrator.hpp"
+#include "bubblecollider.hpp"
 
 class Bubblewell : public fea::Application,
     public fea::MessageReceiver<QuitMessage, MouseMoveMessage, KeyPressedMessage>
@@ -29,6 +30,7 @@ class Bubblewell : public fea::Application,
         Bubbles mBubbles;
 
         BubbleIntegrator mIntegrator;
+        BubbleCollider  mCollider;
         bool mSimulate;
 
         float xCent;

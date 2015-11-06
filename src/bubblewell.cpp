@@ -4,6 +4,7 @@
 #include "texturemaker.hpp"
 #include "randomselector.hpp"
 #include "bubblefactory.hpp"
+#include "bubbledataaccumulator.hpp"
 
 Bubblewell::Bubblewell() :
     mWindow(new fea::SDL2WindowBackend(), fea::VideoMode(768, 768), "Bubblewell"),
@@ -72,7 +73,13 @@ void Bubblewell::loop()
     mInputHandler.process();
 
     if(mSimulate)
+    {
+        BubbleDataAccumulator accumulator(mBubbles.bubbleData());
+        auto lastPositions = accumulator.positions();
+        auto lastVelocities = accumulator.velocities();
         mIntegrator.integrate(mBubbles.bubbleData());
+        mCollider.resolveCollisions(mBubbles.bubbleData(), lastPositions, lastVelocities);
+    }
 
     mRenderer.clear();
 
