@@ -1,16 +1,16 @@
 #pragma once
 #include <vector>
 #include "glm.hpp"
+#include "bubbles.hpp"
 
-class BubbleData;
 
 class BubbleDataAccumulator
 {
     public:
-       BubbleDataAccumulator(const BubbleData& bubbleData);
+       BubbleDataAccumulator(BubbleData bubbleData);
        std::vector<glm::vec2> positions() const;
        std::vector<glm::vec2> velocities() const;
        //add more if needed
     private:
-       const BubbleData& mBubbleData;
+       BubbleData mBubbleData;
 };

@@ -13,7 +13,7 @@ BubbleData Bubbles::bubbleData()
 {
     return
     {
-        mPositions.size(),
+        static_cast<int32_t>(mPositions.size()),
         mPositions.data(),
         mVelocities.data(),
         mRadiuses.data(),

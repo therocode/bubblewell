@@ -4,7 +4,7 @@
 
 struct BubbleData
 {
-    size_t bubbleAmount;
+    int32_t bubbleAmount;
     glm::vec2* positions;
     glm::vec2* velocities;
     float* radiuses;

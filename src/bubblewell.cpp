@@ -96,7 +96,7 @@ void Bubblewell::loop()
 
     BubbleData bubbleData = mBubbles.bubbleData();
 
-    for(size_t index = 0; index < bubbleData.bubbleAmount; index++)
+    for(int32_t index = 0; index < bubbleData.bubbleAmount; index++)
     {
         bubble.setPosition(bubbleData.positions[index]);
         float radius = bubbleData.radiuses[index];
@@ -117,7 +117,6 @@ void Bubblewell::loop()
     mNoiseQuad.tick();
 
     //timer
-
     if(mFrameTimer.frameCount() % 60 == 0)
     {
         std::cout << "frame " << mFrameTimer.frameCount() << ":\n";

@@ -10,7 +10,7 @@ void BubbleIntegrator::integrate(BubbleData bubbleData) const
     float distanceToGravity;
     float radius;
 
-    for(size_t index = 0; index < bubbleData.bubbleAmount; index++)
+    for(int32_t index = 0; index < bubbleData.bubbleAmount; index++)
     {
         if(!bubbleData.staticBodyBools[index])
         {
