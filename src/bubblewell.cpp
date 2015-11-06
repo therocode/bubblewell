@@ -120,11 +120,12 @@ void Bubblewell::loop()
 
     if(mFrameTimer.frameCount() % 60 == 0)
     {
-        std::cout << "frame:\n";
+        std::cout << "frame " << mFrameTimer.frameCount() << ":\n";
+
         std::cout << "fps: " << mFrameTimer.fps() << "\n";
         std::cout << "avg: " << mFrameTimer.avgFrameTime() << "\n";
         std::cout << "last: " << mFrameTimer.lastFrameTime() << "\n";
-        std::cout << "dev: " << mFrameTimer.deviationFactor() << "\n";
+        std::cout << "dev: " << mFrameTimer.avgDeviation() << "\n";
         std::cout << "\n";
     }
 
