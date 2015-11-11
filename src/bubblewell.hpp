@@ -32,6 +32,7 @@ class Bubblewell : public fea::Application,
         BubbleIntegrator mIntegrator;
         BubbleCollider  mCollider;
         bool mSimulate;
+        bool mGravitate;
 
         float xCent;
         float yCent;

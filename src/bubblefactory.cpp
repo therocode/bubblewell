@@ -11,7 +11,7 @@ Bubble BubbleFactory::generate(const glm::vec2& position)
 
      //values near the mean are the most likely
      //standard deviation affects the dispersion of generated values from the mean
-     std::normal_distribution<float> sizeDistribution(0.5f, 0.15f);
+     std::normal_distribution<float> sizeDistribution(0.25f, 0.15f);
 
      float sizeClass = std::max(std::min(1.0f, sizeDistribution(gen)), 0.1f);
 

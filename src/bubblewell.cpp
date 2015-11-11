@@ -12,6 +12,7 @@ Bubblewell::Bubblewell() :
     mFeaInputHandler(new fea::SDL2InputBackend()),
     mInputHandler(mBus, mFeaInputHandler),
     mSimulate(false),
+    mGravitate(false),
     mNoiseAnimation({0, 0}, {64, 64}, 4, 12, true),
     mNoiseQuad({768.0f, 768.0f}),
     mCoronaQuad({768.0f, 768.0f})
@@ -32,6 +33,9 @@ Bubblewell::Bubblewell() :
         mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 40.0f, startY + static_cast<float>(index % 10) * 40.0f)));
     }
 
+    //mBubbles.add(BubbleFactory::generate({ 300.0f, 300.0f}));
+    //mBubbles.add(BubbleFactory::generate({ 700.0f, 700.0f}));
+
     mNoiseTexture = makeTexture("data/textures/noise.png");
     mNoiseQuad.setTexture(mNoiseTexture);  
     mNoiseQuad.setAnimation(mNoiseAnimation);  
@@ -43,11 +47,13 @@ Bubblewell::Bubblewell() :
     mCoronaQuad.setOrigin(mCoronaQuad.getSize() / 2.0f);
     mCoronaQuad.setPosition({384.0f, 384.0f});
 
-    mIntegrator.setGravityPoint({384.0f, 384.0f});
+    //mIntegrator.setGravityPoint({384.0f, 384.0f});
 
-    mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
+    //mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
 
     mWindow.setVSyncEnabled(false);
+    
+    mIntegrator.setGravityPoint({1000000.0f, 2323423423.0f});
 }
 
 void Bubblewell::handleMessage(const QuitMessage& message)
@@ -58,7 +64,8 @@ void Bubblewell::handleMessage(const QuitMessage& message)
 
 void Bubblewell::handleMessage(const MouseMoveMessage& message)
 {
-    //mIntegrator.setGravityPoint(static_cast<glm::vec2>(message.position));
+    if(mGravitate)
+        mIntegrator.setGravityPoint(static_cast<glm::vec2>(message.position));
 
     xCent = static_cast<float>(message.position.x) / 768.0f;
     yCent = static_cast<float>(message.position.y) / 768.0f;
@@ -68,6 +75,12 @@ void Bubblewell::handleMessage(const KeyPressedMessage& message)
 {
     if(message.key == fea::Keyboard::SPACE)
         mSimulate = !mSimulate;
+    if(message.key == fea::Keyboard::G)
+    {
+        mGravitate = !mGravitate;
+        if(!mGravitate)
+            mIntegrator.setGravityPoint({1000000.0f, 2323423423.0f});
+    }
 }
 
 void Bubblewell::loop()
@@ -103,8 +116,8 @@ void Bubblewell::loop()
         //float speed = glm::length(bubbleData.velocities[index]);
         const fea::Color& color = bubbleData.colors[index];
 
-        bubble.setSize({radius, radius});
-        bubble.setOrigin(glm::vec2(radius, radius) / 2.0f);
+        bubble.setSize(glm::vec2(radius, radius) * 2.0f);
+        bubble.setOrigin(glm::vec2(radius, radius));
         bubble.setColor(color);
 
         mRenderer.queue(bubble);
