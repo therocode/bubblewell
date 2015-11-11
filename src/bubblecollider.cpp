@@ -21,27 +21,27 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
 
             glm::vec2 relativeVelA = lastVelA + -lastVelB;
 
-            std::stringstream info;
+            //std::stringstream info;
 
-            info << "---Collision procedure---\n";
+            //info << "---Collision procedure---\n";
 
-            info << "A radius: " << radiusA << "\n";
-            info << "A going from: " << lastPosA << " to " << lastPosA + relativeVelA << "\n";
-            info << "A relative vel: " << relativeVelA << "\n";
+            //info << "A radius: " << radiusA << "\n";
+            //info << "A going from: " << lastPosA << " to " << lastPosA + relativeVelA << "\n";
+            //info << "A relative vel: " << relativeVelA << "\n";
 
-            info << "B radius: " << radiusB << "\n";
-            info << "B static position: " << lastPosB << "\n";
+            //info << "B radius: " << radiusB << "\n";
+            //info << "B static position: " << lastPosB << "\n";
 
             //step 1: Check that A travelled far enough to even possibly hit B
             //
             // If the movement vector of A is shorter than the distance of the spheres minus their radiuses, there can be no collision
             float centerDistance = glm::distance(lastPosA, lastPosB);
 
-            info << "distance between balls: " << centerDistance << "\n";
+            //info << "distance between balls: " << centerDistance << "\n";
 
             float relativeVelAMag = glm::length(relativeVelA);
 
-            info << "relative velocity magnitude " << relativeVelAMag << "\n";
+            //info << "relative velocity magnitude " << relativeVelAMag << "\n";
 
             if(relativeVelAMag < centerDistance - radiusA - radiusB)
             {
@@ -51,8 +51,8 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
 
             //std::cout << "passed 1st \n" << info.str();
 
-            info.clear();
-            info.str("");
+            //info.clear();
+            //info.str("");
 
             //step 2: Check that A is travelling in a direction towards B
             //
@@ -60,8 +60,8 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
 
             glm::vec2 fromAToB = lastPosB - lastPosA;
 
-            info << "a to b vec: " << fromAToB << "\n";
-            info << "a to b vec dot: " << glm::dot(fromAToB, relativeVelA) << "\n";
+            //info << "a to b vec: " << fromAToB << "\n";
+            //info << "a to b vec dot: " << glm::dot(fromAToB, relativeVelA) << "\n";
 
             if(glm::dot(fromAToB, relativeVelA) <= 0.0f)
             {
@@ -72,8 +72,8 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
 
             //std::cout << "passed 2nd \n" << info.str();
 
-            info.clear();
-            info.str("");
+            //info.clear();
+            //info.str("");
 
             //step 3: Check that they overlap when A is on the closest position to B
             //
@@ -83,9 +83,9 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             float radiusSumSquared = std::pow(radiusA + radiusB, 2.0f);
             float closestDistanceSquared = std::pow(centerDistance, 2.0f) - std::pow(distanceToClosestPoint, 2.0f);
 
-            info << "distance to closest point: " << distanceToClosestPoint << "\n";
-            info << "radius sum squared: " << radiusSumSquared << "\n";
-            info << "closestDistanceSquared: " << closestDistanceSquared << "\n";
+            //info << "distance to closest point: " << distanceToClosestPoint << "\n";
+            //info << "radius sum squared: " << radiusSumSquared << "\n";
+            //info << "closestDistanceSquared: " << closestDistanceSquared << "\n";
 
             if(closestDistanceSquared > radiusSumSquared)
             {
@@ -96,8 +96,8 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
 
             //std::cout << "passed 3rd \n" << info.str();
 
-            info.clear();
-            info.str("");
+            //info.clear();
+            //info.str("");
 
             //step 4: Find the point where they would collide along the current velocity
             // This point is also calculated using pythagoras's theorem - based on the sum of the radiuses and the distance at the shortest point
@@ -106,7 +106,7 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             float distanceFromCollisionPointToShortestPoint = radiusSumSquared - closestDistanceSquared;
             float distanceTravelledForCollision = centerDistance - distanceFromCollisionPointToShortestPoint;
 
-            info << "distance travelled for collision: " << distanceTravelledForCollision << "\n";
+            //info << "distance travelled for collision: " << distanceTravelledForCollision << "\n";
 
             //step 5: Make sure that it actually travels far enough to meet the collision point 
             //
@@ -122,19 +122,19 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             
             //std::cout << "passed 4th \n" << info.str();
 
-            info.clear();
-            info.str("");
+            //info.clear();
+            //info.str("");
 
             float collisionPercentage = relativeVelAMag / distanceTravelledForCollision;
 
-            info << "collisionPercentage: " << collisionPercentage << "\n";
+            //info << "collisionPercentage: " << collisionPercentage << "\n";
             
             bubbleData.velocities[bubbleAIndex] = glm::vec2();
             bubbleData.velocities[bubbleBIndex] = glm::vec2();
             bubbleData.positions[bubbleAIndex] += lastVelA * collisionPercentage;
             bubbleData.positions[bubbleBIndex] += lastVelB * collisionPercentage;
 
-            info << "\n";
+            //info << "\n";
 
             //std::cout << info.str();
         }

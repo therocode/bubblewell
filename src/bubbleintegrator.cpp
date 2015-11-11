@@ -17,6 +17,7 @@ void BubbleIntegrator::integrate(BubbleData bubbleData) const
             radius =  bubbleData.radiuses[index];
             oldPosition = bubbleData.positions[index];
             distanceToGravity = glm::distance(oldPosition, mGravityPoint);
+            distanceToGravity = std::max(20.0f, distanceToGravity);
             directionToGravity = glm::normalize(mGravityPoint - oldPosition);
 
             float mass = radius * radius * glm::pi<float>();

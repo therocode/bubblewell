@@ -6,8 +6,8 @@ Bubble BubbleFactory::generate(const glm::vec2& position)
     Bubble newBubble;
     newBubble.staticBody = false;
 
-     static std::random_device rd;
-     static std::mt19937 gen(rd());
+     //static std::random_device rd;
+     static std::mt19937 gen(2);
 
      //values near the mean are the most likely
      //standard deviation affects the dispersion of generated values from the mean
