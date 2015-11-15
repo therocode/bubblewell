@@ -47,13 +47,13 @@ Bubblewell::Bubblewell() :
     mCoronaQuad.setOrigin(mCoronaQuad.getSize() / 2.0f);
     mCoronaQuad.setPosition({384.0f, 384.0f});
 
-    //mIntegrator.setGravityPoint({384.0f, 384.0f});
+    mIntegrator.setGravityPoint({384.0f, 384.0f});
 
-    //mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
+    mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
 
     mWindow.setVSyncEnabled(false);
     
-    mIntegrator.setGravityPoint({1000000.0f, 2323423423.0f});
+    //mIntegrator.setGravityPoint({1000000.0f, 2323423423.0f});
 }
 
 void Bubblewell::handleMessage(const QuitMessage& message)

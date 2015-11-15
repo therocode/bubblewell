@@ -128,15 +128,29 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             float collisionPercentage = relativeVelAMag / distanceTravelledForCollision;
 
             //info << "collisionPercentage: " << collisionPercentage << "\n";
-            
-            bubbleData.velocities[bubbleAIndex] = glm::vec2();
-            bubbleData.velocities[bubbleBIndex] = glm::vec2();
+            //
             bubbleData.positions[bubbleAIndex] += lastVelA * collisionPercentage;
             bubbleData.positions[bubbleBIndex] += lastVelB * collisionPercentage;
 
             //info << "\n";
 
             //std::cout << info.str();
+            
+            //---Collision response---
+            bool aIsStatic = bubbleData.staticBodyBools[bubbleAIndex]; 
+            bool bIsStatic = bubbleData.staticBodyBools[bubbleBIndex]; 
+            float massA = aIsStatic ? 100000000000.0f : radiusA * radiusA * glm::pi<float>();//bubbleData.masses[bubbleAIndex];
+            float massB = bIsStatic ? 100000000000.0f : radiusB * radiusB * glm::pi<float>();//bubbleData.masses[bubbleBIndex];
+
+            glm::vec2 normalizedAtoB = glm::normalize(fromAToB);
+
+            float colMagA = glm::dot(lastVelA, normalizedAtoB);
+            float colMagB = glm::dot(lastVelB, normalizedAtoB);
+
+            float optimizedP = (2.0f * (colMagA - colMagB)) / (massA + massB);
+
+            bubbleData.velocities[bubbleAIndex] = lastVelA - optimizedP * massB * normalizedAtoB;
+            bubbleData.velocities[bubbleBIndex] = lastVelB + optimizedP * massA * normalizedAtoB;
         }
     }
 }
