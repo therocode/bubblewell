@@ -1,7 +1,7 @@
 #include "bubbleintegrator.hpp"
 
-const float gGravityPointMass = 0.1f;
-const float gGravityConstant = 0.1f;
+const float gGravityPointMass = 1.0f;
+const float gGravityConstant = 1.0f;
 
 void BubbleIntegrator::integrate(BubbleData bubbleData) const
 {
