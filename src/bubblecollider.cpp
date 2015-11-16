@@ -25,12 +25,13 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
                 bool bIsStatic = bubbleData.staticBodyBools[bubbleBIndex]; 
 
                 glm::vec2 aToBDirection = glm::normalize(lastPosB - lastPosA);
+                float moveAmount = std::min(10.0f, -centerDistance + radiusA + radiusB) / 2.0f; //div 2 since both circles will move
 
                 //move slightly out from each other
                 if(!aIsStatic)
-                    bubbleData.positions[bubbleAIndex] += -aToBDirection * 0.5f;
+                    bubbleData.positions[bubbleAIndex] += -aToBDirection * moveAmount;
                 if(!bIsStatic)
-                    bubbleData.positions[bubbleBIndex] +=  aToBDirection * 0.5f;
+                    bubbleData.positions[bubbleBIndex] +=  aToBDirection * moveAmount;
             }
             //-----end move out-----
 
