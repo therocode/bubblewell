@@ -16,6 +16,24 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             glm::vec2 lastVelB = lastVelocities[bubbleBIndex];
             float radiusB = bubbleData.radiuses[bubbleBIndex];
 
+            float centerDistance = glm::distance(lastPosA, lastPosB);
+
+            //-----move out overlapping circles-----
+            if(centerDistance < radiusA + radiusB)
+            {
+                bool aIsStatic = bubbleData.staticBodyBools[bubbleAIndex]; 
+                bool bIsStatic = bubbleData.staticBodyBools[bubbleBIndex]; 
+
+                glm::vec2 aToBDirection = glm::normalize(lastPosB - lastPosA);
+
+                //move slightly out from each other
+                if(!aIsStatic)
+                    bubbleData.positions[bubbleAIndex] += -aToBDirection * 0.1f;
+                if(!bIsStatic)
+                    bubbleData.positions[bubbleBIndex] +=  aToBDirection * 0.1f;
+            }
+            //-----end move out-----
+
             //We need the velocity of A as relative to B's velocity so that B can be considered static
             //this is done by adding the reverse velocity of B to A
 
@@ -35,7 +53,6 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             //step 1: Check that A travelled far enough to even possibly hit B
             //
             // If the movement vector of A is shorter than the distance of the spheres minus their radiuses, there can be no collision
-            float centerDistance = glm::distance(lastPosA, lastPosB);
 
             //info << "distance between balls: " << centerDistance << "\n";
 
@@ -57,7 +74,6 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
             //step 2: Check that A is travelling in a direction towards B
             //
             // If the dot product of the movement vector of A and the vector from A to B is not positive, then A is not moving towards B
-
             glm::vec2 fromAToB = lastPosB - lastPosA;
 
             //info << "a to b vec: " << fromAToB << "\n";
