@@ -8,7 +8,7 @@
 
 Bubblewell::Bubblewell() :
     mWindow(new fea::SDL2WindowBackend(), fea::VideoMode(768, 768), "Bubblewell"),
-    mRenderer(fea::Viewport({768, 768}, {0, 0}, fea::Camera({768 / 2.0f, 768 / 2.0f}))),
+    mRenderer(fea::Viewport({768, 768}, {0, 0}, fea::Camera({768 / 2.0f, 768 / 2.0f}, {0.25f, 0.25f}))),
     mFeaInputHandler(new fea::SDL2InputBackend()),
     mInputHandler(mBus, mFeaInputHandler),
     mSimulate(false),
@@ -24,13 +24,13 @@ Bubblewell::Bubblewell() :
 
     mBubbleTexture = makeTexture("data/textures/bubble.png");
 
-    float startX = 184.0f;
-    float startY = 184.0f;
+    float startX = -1184.0f;
+    float startY = -584.0f;
 
-    for(int32_t index = 0; index < 100; index++)
+    for(int32_t index = 0; index < 1000; index++)
     {
         float floatIndex = static_cast<float>(index);
-        mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 40.0f, startY + static_cast<float>(index % 10) * 40.0f)));
+        mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 80.0f, startY + static_cast<float>(index % 10) * 80.0f)));
     }
 
     //mBubbles.add(BubbleFactory::generate({ 300.0f, 300.0f}));
@@ -51,8 +51,6 @@ Bubblewell::Bubblewell() :
 
     mBubbles.add(BubbleFactory::generateStatic({384.0f, 384.0f}));
 
-    mWindow.setVSyncEnabled(false);
-    
     //mIntegrator.setGravityPoint({1000000.0f, 2323423423.0f});
 }
 

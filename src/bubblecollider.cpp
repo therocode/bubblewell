@@ -28,9 +28,9 @@ void BubbleCollider::resolveCollisions(BubbleData bubbleData, const std::vector<
 
                 //move slightly out from each other
                 if(!aIsStatic)
-                    bubbleData.positions[bubbleAIndex] += -aToBDirection;
+                    bubbleData.positions[bubbleAIndex] += -aToBDirection * 0.5f;
                 if(!bIsStatic)
-                    bubbleData.positions[bubbleBIndex] +=  aToBDirection;
+                    bubbleData.positions[bubbleBIndex] +=  aToBDirection * 0.5f;
             }
             //-----end move out-----
 
