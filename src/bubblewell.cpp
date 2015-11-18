@@ -17,20 +17,22 @@ Bubblewell::Bubblewell() :
     mNoiseQuad({768.0f, 768.0f}),
     mCoronaQuad({768.0f, 768.0f})
 {
-    mWindow.setVSyncEnabled(true);
+    mWindow.setVSyncEnabled(false);
     mWindow.setFramerateLimit(60);
 
     subscribe(mBus, *this, false);
 
     mBubbleTexture = makeTexture("data/textures/bubble.png");
 
-    float startX = -1184.0f;
-    float startY = -584.0f;
+    float startX = -784.0f;
+    float startY = -784.0f;
 
-    for(int32_t index = 0; index < 1000; index++)
+    for(int32_t x = 0; x < 30; ++x)
     {
-        float floatIndex = static_cast<float>(index);
-        mBubbles.add(BubbleFactory::generate(glm::vec2(startX + (floatIndex / 10.0f) * 80.0f, startY + static_cast<float>(index % 10) * 80.0f)));
+        for(int32_t y = 0; y < 30; ++y)
+        {
+            mBubbles.add(BubbleFactory::generate(glm::vec2(startX + static_cast<float>(x) * 80.0f, startY + static_cast<float>(y) * 80.0f)));
+        }
     }
 
     //mBubbles.add(BubbleFactory::generate({ 300.0f, 300.0f}));
